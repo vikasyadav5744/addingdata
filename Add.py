@@ -7,6 +7,8 @@ upload=st.file_uploader("csv file upload here")
 if upload !=None:
   master = pd.read_excel(file_name)
   newfile=pd.read_csv(upload, skiprows=1)
+  st.write(master)
+  st.write(newfile)
 else:
   st.write("upload csv")
 
