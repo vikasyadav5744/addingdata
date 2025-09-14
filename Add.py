@@ -5,10 +5,10 @@ st.write("addind data to github excel page")
 file_name='https://github.com/vikasyadav5744/vikasyadav5744/blob/main/sample.xlsx'
 upload=st.file_uploader("csv file upload here")
 if upload !=None:
-  master = pd.read_excel(file_name)
+  #master = pd.read_excel(file_name)
   newfile=pd.read_csv(upload, skiprows=1)
   st.write(newfile)
-  st.write(master)
+  #st.write(master)
 else:
   st.write("upload csv")
 
