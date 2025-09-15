@@ -7,34 +7,33 @@ with tab2:
     data=st.file_uploader("upload your excel file", key='read1')
     if data!=None:
         final_data=pd.read_excel(data)
-    else:
+        def newcal01(df):
+          limit=pd.Series(df.Time.unique())
+          result=pd.DataFrame()
+          a=0
+          while a < len(limit):
+            mark=df[df['Time']==limit[a]]
+            mark['call_max']=mark['CALL_OI'].max()
+            mark['put_max']=mark['PUT_OI'].max()
+            mark['CALL_OI_Per']=(mark['CALL_OI']/mark['call_max'])*100
+            mark['PUT_OI_Per']=(mark['PUT_OI']/mark['put_max'])*100
+            mark['CE_Vol_max']=mark['CALL_VOLUME'].max()
+            mark['PE_Vol_max']=mark['PUT_VOLUME'].max()
+            mark['CALL_VOL_Per']=(mark['CALL_VOLUME']/mark['CE_Vol_max'])*100
+            mark['PUT_VOL_Per']=(mark['PUT_VOLUME']/mark['PE_Vol_max'])*100
+            mark['Sum_CE']=mark['CALL_OI'].sum()
+            mark['Sum_PE']=mark['PUT_OI'].sum()
+            mark['Overall_PCR']=mark['Sum_PE']/mark['Sum_CE']
+            mark['CE_Price']=mark['CALL_VOLUME']/mark['CE_Vol_max']*50 + mark['STRIKE']
+            mark['PE_Price']= mark['STRIKE'] - mark['PUT_VOLUME']/mark['PE_Vol_max']*50 
+            mark['PCR']=mark['PUT_OI']/mark['CALL_OI']
+            mark['PCR_Val']=(mark['PCR'])*50
+            result=pd.concat([result,mark], axis=0, join='outer', ignore_index=True)
+            a+=1
+            return result
+      else:
         st.write("upload file")
     
-    def newcal01(df):
-      limit=pd.Series(df.Time.unique())
-      result=pd.DataFrame()
-      a=0
-      while a < len(limit):
-        mark=df[df['Time']==limit[a]]
-        mark['call_max']=mark['CALL_OI'].max()
-        mark['put_max']=mark['PUT_OI'].max()
-        mark['CALL_OI_Per']=(mark['CALL_OI']/mark['call_max'])*100
-        mark['PUT_OI_Per']=(mark['PUT_OI']/mark['put_max'])*100
-        mark['CE_Vol_max']=mark['CALL_VOLUME'].max()
-        mark['PE_Vol_max']=mark['PUT_VOLUME'].max()
-        mark['CALL_VOL_Per']=(mark['CALL_VOLUME']/mark['CE_Vol_max'])*100
-        mark['PUT_VOL_Per']=(mark['PUT_VOLUME']/mark['PE_Vol_max'])*100
-        mark['Sum_CE']=mark['CALL_OI'].sum()
-        mark['Sum_PE']=mark['PUT_OI'].sum()
-        mark['Overall_PCR']=mark['Sum_PE']/mark['Sum_CE']
-        mark['CE_Price']=mark['CALL_VOLUME']/mark['CE_Vol_max']*50 + mark['STRIKE']
-        mark['PE_Price']= mark['STRIKE'] - mark['PUT_VOLUME']/mark['PE_Vol_max']*50 
-        mark['PCR']=mark['PUT_OI']/mark['CALL_OI']
-        mark['PCR_Val']=(mark['PCR'])*50
-        result=pd.concat([result,mark], axis=0, join='outer', ignore_index=True)
-        a+=1
-        return result
-      
     datafile = newcal01(final_data)
     
     def highlight_second_highest(s):
