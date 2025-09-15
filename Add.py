@@ -5,6 +5,7 @@ import numpy as np
 tab1, tab2=st.tabs(["Nothing to add", "Historical Data"])
 with tab2:
     data=st.file_uploader("upload your excel file", key='read1')
+    
     if data!=None:
         final_data=pd.read_excel(data)
         def newcal01(df):
@@ -31,10 +32,9 @@ with tab2:
             result=pd.concat([result,mark], axis=0, join='outer', ignore_index=True)
             a+=1
             return result
-      else:
-        st.write("upload file")
+     
     
-    datafile = newcal01(final_data)
+    datafile = newcal01(data)
     
     def highlight_second_highest(s):
         max_val = s.max()
