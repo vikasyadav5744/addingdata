@@ -12,7 +12,7 @@ with tab2:
         st.write("upload file")
     
     def newcal01(df):
-      =pd.Series(df.Time.unique())
+      limit=pd.Series(df.Time.unique())
       result=pd.DataFrame()
       a=0
       while a < len(limit):
