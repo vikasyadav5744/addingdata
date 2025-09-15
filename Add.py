@@ -4,9 +4,10 @@ import numpy as np
 
 tab1, tab2=st.tabs(["Nothing to add", "Historical Data"])
 with tab2:
-    read_data=st.file_uploader("upload your excel file", key='read1')
+    data=st.file_uploader("upload your excel file", key='read1')
     if read_data!=None:
-        final_data=pd.read_excel(read_data)
+        final_data=pd.read_excel(data)
+        return final_data
     else:
         st.write("upload file")
     
