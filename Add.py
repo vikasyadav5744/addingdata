@@ -32,10 +32,7 @@ with tab2:
             result=pd.concat([result,mark], axis=0, join='outer', ignore_index=True)
             a+=1
             return result
-     
-    
-    datafile = newcal01(data)
-    
+            
     def highlight_second_highest(s):
         max_val = s.max()
         second_highest = s.nlargest(2).iloc[-1]  # get second largest value
