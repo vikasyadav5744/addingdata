@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 
-tab1, tab2=st.tabs("Nothing to add", "Historical Data")
+tab1, tab2=st.tabs(["Nothing to add", "Historical Data"])
 with tab2:
     read_data=st.file_uploader("upload your excel file", key='read1')
     if read_data!=None:
