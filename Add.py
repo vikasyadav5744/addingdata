@@ -5,9 +5,9 @@ import numpy as np
 tab1, tab2=st.tabs([ "Historical Data","Nothing to add"])
 with tab1:
     data=st.file_uploader("upload your excel file", key='read1')
-    
     if data!=None:
         final_data=pd.read_excel(data)
+        st.dataframe(fina_data.head())
 
         
         def newcal01(df):
