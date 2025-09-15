@@ -2,12 +2,14 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 
-tab1, tab2=st.tabs(["Nothing to add", "Historical Data"])
-with tab2:
+tab1, tab2=st.tabs([ "Historical Data","Nothing to add"])
+with tab1:
     data=st.file_uploader("upload your excel file", key='read1')
     
     if data!=None:
         final_data=pd.read_excel(data)
+
+        
         def newcal01(df):
           limit=pd.Series(df.Time.unique())
           result=pd.DataFrame()
