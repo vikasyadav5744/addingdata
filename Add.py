@@ -7,7 +7,6 @@ with tab2:
     data=st.file_uploader("upload your excel file", key='read1')
     if data!=None:
         final_data=pd.read_excel(data)
-        return final_data
     else:
         st.write("upload file")
     
