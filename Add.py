@@ -122,7 +122,7 @@ if 'page' not in st.session_state:
 # function for button of next and previous
 def previous():
     if st.session_state.page >0:
-    st.session_state.page -=1
+        st.session_state.page -=1
                 
 def next():
     if (st.session_state.page +1) < len(time_option1):
