@@ -1,63 +1,73 @@
 import pandas as pd
 import streamlit as st
 import numpy as np
-import openxl
 
 tab1, tab2=st.tabs([ "Historical Data","Nothing to add"])
 with tab1:
     data=st.file_uploader("upload your excel file", key='read1')
     if data!=None:
-        final_data=pd.read_excel(data)
-        st.dataframe(fina_data.head())
+        data=pd.read_excel(data)
+        
+    st.dataframe(data)
+
+
+
+
+
+
+
+
+
+
 
         
-        def newcal01(df):
-          limit=pd.Series(df.Time.unique())
-          result=pd.DataFrame()
-          a=0
-          while a < len(limit):
-            mark=df[df['Time']==limit[a]]
-            mark['call_max']=mark['CALL_OI'].max()
-            mark['put_max']=mark['PUT_OI'].max()
-            mark['CALL_OI_Per']=(mark['CALL_OI']/mark['call_max'])*100
-            mark['PUT_OI_Per']=(mark['PUT_OI']/mark['put_max'])*100
-            mark['CE_Vol_max']=mark['CALL_VOLUME'].max()
-            mark['PE_Vol_max']=mark['PUT_VOLUME'].max()
-            mark['CALL_VOL_Per']=(mark['CALL_VOLUME']/mark['CE_Vol_max'])*100
-            mark['PUT_VOL_Per']=(mark['PUT_VOLUME']/mark['PE_Vol_max'])*100
-            mark['Sum_CE']=mark['CALL_OI'].sum()
-            mark['Sum_PE']=mark['PUT_OI'].sum()
-            mark['Overall_PCR']=mark['Sum_PE']/mark['Sum_CE']
-            mark['CE_Price']=mark['CALL_VOLUME']/mark['CE_Vol_max']*50 + mark['STRIKE']
-            mark['PE_Price']= mark['STRIKE'] - mark['PUT_VOLUME']/mark['PE_Vol_max']*50 
-            mark['PCR']=mark['PUT_OI']/mark['CALL_OI']
-            mark['PCR_Val']=(mark['PCR'])*50
-            result=pd.concat([result,mark], axis=0, join='outer', ignore_index=True)
-            a+=1
-            return result
+    #     def newcal01(df):
+    #       limit=pd.Series(df.Time.unique())
+    #       result=pd.DataFrame()
+    #       a=0
+    #       while a < len(limit):
+    #         mark=df[df['Time']==limit[a]]
+    #         mark['call_max']=mark['CALL_OI'].max()
+    #         mark['put_max']=mark['PUT_OI'].max()
+    #         mark['CALL_OI_Per']=(mark['CALL_OI']/mark['call_max'])*100
+    #         mark['PUT_OI_Per']=(mark['PUT_OI']/mark['put_max'])*100
+    #         mark['CE_Vol_max']=mark['CALL_VOLUME'].max()
+    #         mark['PE_Vol_max']=mark['PUT_VOLUME'].max()
+    #         mark['CALL_VOL_Per']=(mark['CALL_VOLUME']/mark['CE_Vol_max'])*100
+    #         mark['PUT_VOL_Per']=(mark['PUT_VOLUME']/mark['PE_Vol_max'])*100
+    #         mark['Sum_CE']=mark['CALL_OI'].sum()
+    #         mark['Sum_PE']=mark['PUT_OI'].sum()
+    #         mark['Overall_PCR']=mark['Sum_PE']/mark['Sum_CE']
+    #         mark['CE_Price']=mark['CALL_VOLUME']/mark['CE_Vol_max']*50 + mark['STRIKE']
+    #         mark['PE_Price']= mark['STRIKE'] - mark['PUT_VOLUME']/mark['PE_Vol_max']*50 
+    #         mark['PCR']=mark['PUT_OI']/mark['CALL_OI']
+    #         mark['PCR_Val']=(mark['PCR'])*50
+    #         result=pd.concat([result,mark], axis=0, join='outer', ignore_index=True)
+    #         a+=1
+    #         return result
             
-    def highlight_second_highest(s):
-        max_val = s.max()
-        second_highest = s.nlargest(2).iloc[-1]  # get second largest value
-        threshold = 0.75 * max_val
-        def color_val(val):
-            if val > threshold and val == second_highest:
-                return 'background-color: yellow'
-            elif val == max_val:
-                return 'background-color: green; color:black'
-            else:
-                return 'background-color:#f7f4d6; color:black'
-            return s.apply(color_val)
+    # def highlight_second_highest(s):
+    #     max_val = s.max()
+    #     second_highest = s.nlargest(2).iloc[-1]  # get second largest value
+    #     threshold = 0.75 * max_val
+    #     def color_val(val):
+    #         if val > threshold and val == second_highest:
+    #             return 'background-color: yellow'
+    #         elif val == max_val:
+    #             return 'background-color: green; color:black'
+    #         else:
+    #             return 'background-color:#f7f4d6; color:black'
+    #         return s.apply(color_val)
     
-    def highlight_negative(val):
-        color = 'red' if val < 0 else 'green' 
-        return f'color: {color}'
+    # def highlight_negative(val):
+    #     color = 'red' if val < 0 else 'green' 
+    #     return f'color: {color}'
 
-    def color_two(val, props='background-color:orange; color:black'):
-        return props if val >0 else ''
+    # def color_two(val, props='background-color:orange; color:black'):
+    #     return props if val >0 else ''
 
-    def color_all(val, props='background-color:#f7f4d6; color:black'):
-        return props if val >0 else props
+    # def color_all(val, props='background-color:#f7f4d6; color:black'):
+    #     return props if val >0 else props
 ######################### background change ####################
    
 # col1, col2, col3, col4, col5, col6, col7, col8= st.columns(8)
