@@ -1,13 +1,14 @@
 import pandas as pd
 import streamlit as st
 import numpy as np
+import io
 
 
 tab1, tab2=st.tabs([ "Historical Data","Nothing to add"])
 with tab1:
     data=st.file_uploader("upload your excel file", key='read1')
     if data!=None:
-        data=pd.read_excel(data)
+        data=pd.read_excel(data, engine='openpyxl')
     st.dataframe(data)
 
 
