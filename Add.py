@@ -7,7 +7,6 @@ with tab1:
     data=st.file_uploader("upload your excel file", key='read1')
     if data!=None:
         data=pd.read_excel(data)
-        
     st.dataframe(data)
 
 
