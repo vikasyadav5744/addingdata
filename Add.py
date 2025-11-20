@@ -14,7 +14,7 @@ data= st.file_uploader("get your csv file for NIFTY", key='upload2')
 if data==None:
     st.write("please upload csv file")
 else:
-    data=pd.read_excel(data)
+    pd.read_excel(data)
     
 def newcal01(df):
     limit =pd.Series(df.Time.unique())
