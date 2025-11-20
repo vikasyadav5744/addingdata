@@ -5,8 +5,6 @@ import numpy as np
 import datetime as dt
 from datetime import datetime 
 import time 
-import os
-from openpyxl import load_workbook
 
 st.set_page_config(page_title=None, page_icon=None, layout="wide", initial_sidebar_state="auto", menu_items=None) 
 pd.options.mode.copy_on_write = True
