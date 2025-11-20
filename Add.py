@@ -43,9 +43,7 @@ def newcal01(df):
 
 datafile = newcal01(data)
 datafile['Date'] = datafile['Date'].dt.date
-
 tab1, tab2, tab3=st.tabs(["Table view of data", "Data charts / visualization", "time wise details of strike"])
-
 with tab1:
     def highlight_second_highest(s):
         max_val = s.max()
